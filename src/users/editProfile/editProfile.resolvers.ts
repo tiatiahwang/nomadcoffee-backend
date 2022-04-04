@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 import fs from 'fs';
-import client from '../../client';
+import { Resolvers } from '../../typed';
 import { protectedResolver } from '../users.utils';
 
-export default {
+const resolvers: Resolvers = {
   Mutation: {
     editProfile: protectedResolver(
       async (
@@ -16,7 +16,7 @@ export default {
           githubUsername,
           avatarURL,
         },
-        { loggedInUser },
+        { loggedInUser, client },
       ) => {
         let avatar = null;
         if (avatarURL) {
@@ -24,7 +24,7 @@ export default {
           const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
           const readStream = createReadStream();
           const writeStream = fs.createWriteStream(
-            process.cwd() + '/uploads/' + newFilename,
+            process.cwd() + '/src/uploads/' + newFilename,
           );
           readStream.pipe(writeStream);
           avatar = `http://localhost:4000/static/${newFilename}`;
@@ -59,3 +59,5 @@ export default {
     ),
   },
 };
+
+export default resolvers;
