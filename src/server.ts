@@ -10,9 +10,14 @@ import client from './client';
 const apollo = new ApolloServer({
   resolvers,
   typeDefs,
-  context: async ({ req }) => {
+  context: async (ctx) => {
+    const {
+      req: {
+        headers: { token },
+      },
+    } = ctx;
     return {
-      loggedInUser: await getUser(req.headers.token),
+      loggedInUser: await getUser(token),
       client,
     };
   },
