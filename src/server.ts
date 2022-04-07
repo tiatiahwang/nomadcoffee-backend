@@ -10,6 +10,8 @@ import client from './client';
 const apollo = new ApolloServer({
   resolvers,
   typeDefs,
+  playground: true,
+  introspection: true,
   context: async (ctx) => {
     const {
       req: {
