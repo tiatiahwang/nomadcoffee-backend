@@ -6,7 +6,9 @@
     "preinstall": "npx npm-force-resolutions",
     "dev": "nodemon --exec ts-node src/server --ext ts,js",
     "migrate": "npx prisma migrate dev --preview-feature",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "start": "node build/server",
+    "build": "npx tsc"
   },
   "repository": {
     "type": "git",
