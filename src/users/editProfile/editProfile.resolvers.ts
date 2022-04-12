@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import fs from 'fs';
 import { Resolvers } from '../../typed';
 import { protectedResolver } from '../users.utils';
