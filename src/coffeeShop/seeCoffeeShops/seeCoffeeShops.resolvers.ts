@@ -5,8 +5,13 @@ const resolvers: Resolvers = {
     seeCoffeeShops: (_, { page }, { client }) =>
       client.coffeeShop.findMany({
         take: 9,
-        skip: (page - 1) * 9,
+        ...(page && { skip: 1, cursor: { id: page } }),
         orderBy: { updatedAt: 'desc' },
+        include: {
+          photos: true,
+          user: { select: { username: true, avatarURL: true } },
+          categories: { select: { id: true, name: true } },
+        },
       }),
   },
 };

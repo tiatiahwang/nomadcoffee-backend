@@ -5,6 +5,8 @@ export default gql`
     id: Int!
     url: String!
     shop: CoffeeShop!
+    createdAt: String!
+    updatedAt: String!
   }
   type CoffeeShop {
     id: Int!
@@ -14,6 +16,11 @@ export default gql`
     user: User!
     photos: [CoffeeShopPhoto]
     categories: [Category]
+    likes: Int!
+    isMine: Boolean!
+    isLiked: Boolean!
+    createdAt: String!
+    updatedAt: String!
   }
   type Category {
     id: Int!
@@ -21,5 +28,7 @@ export default gql`
     slug: String!
     shops: [CoffeeShop]
     totalShops: Int
+    createdAt: String!
+    updatedAt: String!
   }
 `;

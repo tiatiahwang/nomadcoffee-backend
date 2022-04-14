@@ -21,6 +21,7 @@ model User {
   followers User[] @relation("FollowRelation", references: [id])
   following User[] @relation("FollowRelation", references: [id])
   shops CoffeeShop[]
+  likes     Like[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -42,6 +43,7 @@ model CoffeeShop{
   user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
   photos CoffeeShopPhoto[]
+  likes     Like[]
   categories Category[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,4 +56,16 @@ model Category {
   shops CoffeeShop[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id Int @id @default(autoincrement())
+  coffeeShop CoffeeShop  @relation(fields: [coffeeShopId], references: [id])
+  user User @relation(fields: [userId], references: [id])  
+  coffeeShopId Int
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([coffeeShopId, userId])
 }
