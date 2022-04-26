@@ -2,10 +2,10 @@ import { Resolvers } from '../../typed';
 
 const resolvers: Resolvers = {
   Query: {
-    seeCoffeeShops: (_, { page }, { client }) =>
-      client.coffeeShop.findMany({
-        take: 9,
-        ...(page && { skip: 1, cursor: { id: page } }),
+    seeCoffeeShops: async (_, { page }, { client }) =>
+      await client.coffeeShop.findMany({
+        take: 2,
+        skip: page,
         orderBy: { updatedAt: 'desc' },
         include: {
           photos: true,

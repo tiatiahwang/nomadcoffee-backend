@@ -9,14 +9,14 @@ const resolvers: Resolvers = {
       if (!user) {
         return {
           ok: false,
-          error: 'user not found.',
+          error: '가입되지 않은 계정입니다',
         };
       }
       const checkedPassword = await bcrypt.compare(password, user.password);
       if (!checkedPassword) {
         return {
           ok: false,
-          error: 'check the password.',
+          error: '비밀번호를 확인해주세요',
         };
       }
       const token = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
