@@ -17,6 +17,7 @@ const resolvers: Resolvers = {
           ],
         },
         take: 9,
+        orderBy: { updatedAt: 'desc' },
       }),
   },
 };
