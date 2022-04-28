@@ -15,7 +15,7 @@ const resolvers: Resolvers = {
         if (exist) {
           return {
             ok: false,
-            error: 'email or username already taken.',
+            error: '이미 가입된 계정/이메일입니다',
           };
         }
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -32,7 +32,7 @@ const resolvers: Resolvers = {
       } catch {
         return {
           ok: false,
-          error: 'cannot create an account.',
+          error: '계정을 만들수 없습니다',
         };
       }
     },

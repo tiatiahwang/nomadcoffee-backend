@@ -3,7 +3,7 @@ import { Resolvers } from '../typed';
 const resolvers: Resolvers = {
   CoffeeShop: {
     photos: ({ id }, _, { client }) =>
-      client.coffeeShopPhoto.findMany({ where: { shop: { id } } }),
+      client.coffeeShopPhoto.findMany({ where: { coffeeShopId: id } }),
     user: ({ userId }, _, { client }) =>
       client.user.findUnique({ where: { id: userId } }),
     categories: ({ id }, _, { client }) =>
