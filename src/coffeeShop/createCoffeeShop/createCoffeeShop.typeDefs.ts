@@ -9,8 +9,9 @@ export default gql`
   type Mutation {
     createCoffeeShop(
       name: String!
-      latitude: String!
-      longitude: String!
+      latitude: String
+      longitude: String
+      address: String
       description: String
       photos: [Upload]!
       categories: [String]!
