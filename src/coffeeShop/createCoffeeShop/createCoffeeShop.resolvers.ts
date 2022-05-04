@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
     createCoffeeShop: protectedResolver(
       async (
         _,
-        { name, latitude, longitude, categories, photos, description, address },
+        { name, latitude, longitude, categories, photo, description, address },
         { loggedInUser, client },
       ) => {
         const exist = await client.coffeeShop.findFirst({ where: { name } });
@@ -36,23 +36,18 @@ const resolvers: Resolvers = {
           },
         });
 
-        let coffeeShopPhotos = [];
-        if (photos) {
-          for (let photo of photos) {
-            const url = await uploadToS3(photo, loggedInUser.username, 'shops');
-            const newPhoto = await client.coffeeShopPhoto.create({
-              data: {
-                url,
-                shop: { connect: { id: newCoffeeShop.id } },
-              },
-            });
-            coffeeShopPhotos.push(newPhoto);
-          }
+        if (photo) {
+          const url = await uploadToS3(photo, loggedInUser.username, 'shops');
+          await client.coffeeShopPhoto.create({
+            data: {
+              url,
+              shop: { connect: { id: newCoffeeShop.id } },
+            },
+          });
         }
 
         return {
           ok: true,
-          photos: coffeeShopPhotos,
         };
       },
     ),
