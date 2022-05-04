@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
     createCoffeeShop: protectedResolver(
       async (
         _,
-        { name, latitude, longitude, categories, photos },
+        { name, latitude, longitude, categories, photos, description },
         { loggedInUser, client },
       ) => {
         const exist = await client.coffeeShop.findFirst({ where: { name } });
@@ -30,6 +30,7 @@ const resolvers: Resolvers = {
             name,
             latitude,
             longitude,
+            description,
             categories: { connectOrCreate: categoryObj },
           },
         });
