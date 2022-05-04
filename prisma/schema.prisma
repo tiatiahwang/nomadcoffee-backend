@@ -37,9 +37,10 @@ model CoffeeShopPhoto {
 
 model CoffeeShop{
   id Int @id @default(autoincrement())
-  name String
-  latitude String
-  longitude String
+  name String    @unique
+  latitude String?
+  longitude String?
+  address String?
   description String?
   user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int

@@ -11,9 +11,10 @@ export default gql`
   type CoffeeShop {
     id: Int!
     name: String!
-    latitude: String!
-    longitude: String!
-    description: String
+    latitude: String
+    longitude: String
+    address: String!
+    description: String!
     user: User!
     photos: [CoffeeShopPhoto]
     categories: [Category]
