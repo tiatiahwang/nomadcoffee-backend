@@ -37,7 +37,7 @@ model CoffeeShopPhoto {
 
 model CoffeeShop{
   id Int @id @default(autoincrement())
-  name String    @unique
+  name String
   latitude String?
   longitude String?
   address String?
