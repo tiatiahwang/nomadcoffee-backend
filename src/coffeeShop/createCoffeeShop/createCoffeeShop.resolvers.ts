@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
     createCoffeeShop: protectedResolver(
       async (
         _,
-        { name, latitude, longitude, categories, photo, description, address },
+        { name, latitude, longitude, categories, photos, description, address },
         { loggedInUser, client },
       ) => {
         const exist = await client.coffeeShop.findFirst({ where: { name } });
@@ -36,8 +36,8 @@ const resolvers: Resolvers = {
           },
         });
 
-        if (photo) {
-          const url = await uploadToS3(photo, loggedInUser.username, 'shops');
+        if (photos) {
+          const url = await uploadToS3(photos, loggedInUser.username, 'shops');
           await client.coffeeShopPhoto.create({
             data: {
               url,

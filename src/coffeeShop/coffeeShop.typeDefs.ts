@@ -16,7 +16,7 @@ export default gql`
     address: String!
     description: String!
     user: User!
-    photo: CoffeeShopPhoto!
+    photos: CoffeeShopPhoto!
     categories: [Category]
     likes: Int!
     isMine: Boolean!

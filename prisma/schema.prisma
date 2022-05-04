@@ -44,7 +44,7 @@ model CoffeeShop{
   description String?
   user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
-  photo CoffeeShopPhoto[]
+  photos CoffeeShopPhoto[]
   likes     Like[]
   categories Category[]
   createdAt DateTime @default(now())
